@@ -1,3 +1,9 @@
+# Author: Thanos Strantzalis
+# Data: November 2013
+# description: This script was created in order to create training polygons (trainingPoly.shp) 
+## that will be used by the RFclasification.R script. The user has to manually 
+## draw the polygons
+
 rm(list = ls())
 
 library(raster)
@@ -44,9 +50,6 @@ plot(lulcGewata, col=cols, legend=FALSE, ext=e)
 # now define a training polygon
 coffee <- drawPoly(sp=TRUE)
 projection(coffee) <- projection(lulcGewata)
-# check
-plot(lulcGewata)
-plot(coffee, add=TRUE)
 # convert to SpatialPolygonsDataFrame
 coffee <- SpatialPolygonsDataFrame(coffee, data=data.frame(
   class="coffee investment area"), match.ID=FALSE)
@@ -59,9 +62,6 @@ plot(lulcGewata, col=cols, legend=FALSE, ext=e)
 # now define a training polygon
 bamboo <- drawPoly(sp=TRUE)
 projection(bamboo) <- projection(lulcGewata)
-# check
-plot(lulcGewata)
-plot(bamboo, add=TRUE)
 # convert to SpatialPolygonsDataFrame
 bamboo <- SpatialPolygonsDataFrame(bamboo, data=data.frame(
   class="bamboo plantations"), match.ID=FALSE)
@@ -76,9 +76,6 @@ plot(lulcGewata, col=cols, legend=FALSE, ext=e)
 soil <- drawPoly(sp=TRUE)
 soil <- gUnion(soil, drawPoly(sp=TRUE))
 projection(soil) <- projection(lulcGewata)
-# check
-plot(lulcGewata)
-plot(soil, add=TRUE)
 # convert to SpatialPolygonsDataFrame
 soil <- SpatialPolygonsDataFrame(soil, data=data.frame(
   clas
@@ -90,9 +87,6 @@ plot(lulcGewata, col=cols, legend=FALSE)
 forest <- drawPoly(sp=TRUE)
 forest <- gUnion(forest, drawPoly(sp=TRUE))
 projection(forest) <- projection(lulcGewata)
-# check
-plot(lulcGewata)
-plot(soil, add=TRUE)
 # convert to SpatialPolygonsDataFrame
 forest <- SpatialPolygonsDataFrame(forest, data=data.frame(
   class="forest area"), match.ID=FALSE)
